@@ -90,14 +90,14 @@
 
 %below is the first astract draft 
 
-%Exoplanetary science is a rapidly growing field in astronomy. However, detecting an exoplanet is very challenging. Over the last couple of decades, ground-based and space-based telescopes became more and more focused on this purpose, using a variety of detection techniques, with the goal to eventually find a nearby planet in the habitable zone with the next generation of instruments. The technique of direct imaging will play a key role in this search. Our project will directly address this challenge of direct detection and characterisation of exoplanets, by developing and testing high precision adaptive optics control techniques to compensate for atmospheric optical turbulence, and the non-common paths aberrations (NCPA). The problem of NCPA is key in direct imaging, as it is one of the main sources of residual speckles in the PSF. The  pyramid  wavefront  sensor  (PWFS),  more  and  more  favored  in  adaptive optics systems for its high sensitivity, is intimately linked with the NCPA correction.  However, the PWFS is non-linear, making its use more challenging.  We will leverage newly available real-time computing capabilities and machine learning numerical tools in order to tackle those problems of NCPA corrections with a PWFS, for boosting image contrast and quality to reveal planet images and better characterise them. We will present the Dr WHO algorithm, which is kind of reinforcement learning approach for frequency lucky imaging and update on-sky the PWFS reference.\\
+%Exoplanetary science is a rapidly growing field in astronomy. However, detecting an exoplanet is very challenging. Over the last couple of decades, ground-based and space-based telescopes became more and more focused on this purpose, using a variety of detection techniques, with the goal to eventually find a nearby planet in the habitable zone with the next generation of instruments. The technique of direct imaging will play a key role in this search. Our project will directly address this challenge of direct detection and characterisation of exoplanets, by developing and testing high precision adaptive optics control techniques to compensate for atmospheric optical turbulence, and the non-common paths aberrations (NCPA). The problem of NCPA is key in direct imaging, as it is one of the main sources of residual speckles in the PSF. The  pyramid  wavefront  sensor  (PyWFS),  more  and  more  favored  in  adaptive optics systems for its high sensitivity, is intimately linked with the NCPA correction.  However, the PyWFS is non-linear, making its use more challenging.  We will leverage newly available real-time computing capabilities and machine learning numerical tools in order to tackle those problems of NCPA corrections with a PyWFS, for boosting image contrast and quality to reveal planet images and better characterise them. We will present the Dr WHO algorithm, which is kind of reinforcement learning approach for frequency lucky imaging and update on-sky the PyWFS reference.\\
 
 
 
 % below is the submitted for WFS in the VLT era. \\
 Exoplanetary science is a rapidly growing field in astronomy. However, detecting directly an exoplanet is very challenging. Over the last couple of decades, ground-based and space-based telescopes became more and more focused on this purpose, using a variety of wavefront control techniques. Our project directly addresses this challenge, by developing and testing high precision adaptive optics control techniques to compensate for atmospheric optical turbulence, the non-common paths aberrations (NCPA). The problem of NCPA is key in direct imaging, as it is one of the main sources of residual speckles in the PSF.
-We will present the Dr WHO - Direct Reinforcement Wavefront Heuristic Optimisation - algorithm, a new technique aimed at real-time compensation of NCPA, for boosting image contrast and quality to reveal planet images and better characterize them. It is a kind of reinforcement learning approach for frequency lucky imaging and update on-sky the PWFS reference.
-We show that DrWHO does not require accurate wavefront sensor calibration, and is applicable to non-linear wavefront sensing situations. We demonstrate its performance in simulation and on-sky using with the pyramid wavefront sensor (PWFS) sensor.
+We will present the Dr WHO - Direct Reinforcement Wavefront Heuristic Optimisation - algorithm, a new technique aimed at real-time compensation of NCPA, for boosting image contrast and quality to reveal planet images and better characterize them. It is a kind of reinforcement learning approach for frequency lucky imaging and update on-sky the PyWFS reference.
+We show that DrWHO does not require accurate wavefront sensor calibration, and is applicable to non-linear wavefront sensing situations. We demonstrate its performance in simulation and on-sky using with the pyramid wavefront sensor (PyWFS) sensor.
 
 \end{abstract}
 
@@ -111,9 +111,9 @@ Those instruments are provided with high rejection coronagraphs, allowing to per
 Those first generation of xAO systems on 8-10-meter class telescopes will be very valuable in benefiting the generation of xAO instruments on extremely large telescopes.\\
 
 Wavefront sensing is a key feature of any AO system as that measures in real time the distortion of the wavefront. Wavefront sensors need to have enough spatial resolution, and be fast enough to be able to compensate in real-time the atmospheric turbulence, without amplifying and propagating the measurement of the noise. The photon noise is the fundamental limit. The sensitivity is another key driver, as it needs to be able to measure with high accuracy the low orders or aberrations. \cite{Rousset1999} made an overview of wavefront sensing and presented some WFS. 
-Back in 1996, \cite{Ragazzoni1996} introduced the PWFS, which has the precious characteristic of being particularly sensitive, way more than any other WFS to date. 
+Back in 1996, \cite{Ragazzoni1996} introduced the PyWFS, which has the precious characteristic of being particularly sensitive, way more than any other WFS to date. 
 It took nearly a decade before it was used in astronomy, with its first implementation in a very large telescope, the Large Binocular Telescope (2x8.4m) in 2010 by \cite{Esposito2010LBT}. 
-However, this PWFS is far from being mastered and fully understood, and still remains an active field of research \citep{Deo2019gain, Chambouleyron2020}.
+However, this PyWFS is far from being mastered and fully understood, and still remains an active field of research \citep{Deo2019gain, Chambouleyron2020}.
 
 
 
@@ -135,85 +135,105 @@ They are partially static, and partially quasi-static in time. They can vary wit
 \end{figure}
 
 
-\cite{Esposito2015} have been pioneering the way to deal with NCPA with non-linear wavefront sensors, mainly PWFS. 
-In fact, as they explain, NCPA are usually corrected by introducing an offset in the WFS signals corresponding to the aberration to correct. However, this is assuming the PWFS is linear, and the calibration with the DM is performed with a previously calculated control matrix, which is true within some extend but mainly wrong, as described earlier. 
-As a result, the problems of NCPA and non-linearity of a PWFS are intrinsically linked. They mainly solve the problem by adapting the optical gain with a tracking loop, thanks to a sinusoidal signal added on the DM, in order to have a modulation and a demodulation allowing to derive the value of the optical gain. \textit{to be confirmed, not sure to have understood well.}\\
+\cite{Esposito2015} have been pioneering the way to deal with NCPA with non-linear wavefront sensors, mainly PyWFS. 
+In fact, as they explain, NCPA are usually corrected by introducing an offset in the WFS signals corresponding to the aberration to correct. However, this is assuming the PyWFS is linear, and the calibration with the DM is performed with a previously calculated control matrix, which is true within some extend but mainly wrong, as described earlier. 
+As a result, the problems of NCPA and non-linearity of a PyWFS are intrinsically linked. They mainly solve the problem by adapting the optical gain with a tracking loop, thanks to a sinusoidal signal added on the DM, in order to have a modulation and a demodulation allowing to derive the value of the optical gain. \textit{to be confirmed, not sure to have understood well.}\\
 
 
 We will present the Dr WHO algorithm and its results in simulations with the Compass software \citep{Compass}, on the SCExAO bench, and on-sky.\\
 
 
 \section{Problem statement}
-The NCPA is a central issue in direct imaging of exoplanets as it is the main limiting source of error in the PSF. Furthermore, in a system with a PWFS, this problem is intrinsically linked with it. The key issue is to understand what is the \textit{true} reference of the PWFS, that we will call the \textbf{Ideal reference}. In other word, we need to understand what gives a flat wavefront, corrected from all static and quasi-static aberrations and mainly the NCPA. 
-The way the reference of the PWFS is currently set, is with an internal light source inside the instrument, before the observations. However, in reality, the \textit{ideal} PWFS reference is constantly evolving\footnote{because of the quasi-static aberrations and the chromaticity of the wavefront}, and is different on sky than with the internal light source. Therefore, a continuous way to measure the \textit{ideal} reference is essential. \\
-I would like to emphasise that the \textit{actual} WFS reference as set in the WFS is not the \textit{ideal} reference: the goal is to find what is the closest from it and implement it on the WFS.\\ 
-One of the problems is that besides the NCPA, the atmospheric wavefront keeps evolving, therefore we also have atmospheric residuals on top of the NCPA seen by the focal plane camera. This makes the understanding of the \textit{ideal} reference more challenging as well as the NCPA retrieval, since we can't differentiate which aberrations in the focal plane are due to the residuals \textcolor{blue}{develop here}. \\
-Yet, another key issue is that the PWFS is non-linear: its response is different depending on the amplitude of the incoming wavefront. Thus, even if we understand what the NCPA are and update the reference of the WFS, there will then be a wrong understanding of the NCPA from the DM because of this non-linearity, therefore a wrong command on the DM, therefore a wrong correction of the NCPA. Adding to that that the NCPA are dynamic, the problem reaches another level of complexity. \ref{fig:pyr_ncpa_pb} gives a schematic view of the problem. 
+The NCPA is a central issue in direct imaging of exoplanets as it is the main limiting source of error in the PSF. Furthermore, in a system with a PyWFS, this problem is intrinsically linked with it. The key issue is to understand what is the \textit{true} reference of the PyWFS, that we will call the \textbf{ideal} reference. In other word, we need to understand what gives a flat wavefront, corrected from all static and quasi-static aberrations and mainly the NCPA. 
+Usually the reference of the PyWFS is set with an internal light source inside the instrument, before the observations. However, in reality, the \textit{ideal} PyWFS reference is constantly evolving\footnote{because of the quasi-static aberrations and the chromaticity of the wavefront}, and is different on sky than with the internal light source. Therefore, a continuous way to measure the \textit{ideal} reference is essential. \\
+In a word, the \textit{actual} reference as set in the WFS is not the \textit{ideal} reference: the goal is to find what is the closest from it and implement it on the WFS.\\
 
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=0.45\textwidth]{fig/pyr_ncpa_pb.png}\
-      \caption{Schematic description of the NCPA problem linked with the non-linearity of the PWFS.}
-    \label{fig:pyr_ncpa_pb}
-\end{figure}
+One of the problems is that besides the NCPA, the atmospheric wavefront keeps evolving, therefore we also have atmospheric residuals on top of the NCPA seen by the focal plane camera, which sees a combination of the two. This makes the understanding of the \textit{ideal} reference more challenging as well as the NCPA retrieval, since we can't differentiate which aberrations in the focal plane are due to the atmospheric residuals \textcolor{blue}{develop here?}. \\
+
+\textcolor{blue}{Describe here some other methods that deal with this issue, and why is there a need to bring up another method. why is Dr WHO interesting, in general, and compared to other methods.}
+\textcolor{red}{more biblio}
 
 
 \section{Algorithm description}
+\textcolor{blue}{Anthony: La section suivante doit decrire l'algo, et il faut qu'on comprenne a ce stade "le pourquoi" de ces etapes. A la fin de la 3 ce qui doit manquer au lecteur c'est les resultats mais il doit etre en mesure de comprendre pourquoi tu procède comme ca (au moins de facon globale, les details peuvent etre compris ensuite). Il faut pouvoir expliquer pourquoi 30s de moyenne et pourquoi 10\%, est ce qu'il s'agit de guess, de valeurs optimales... et il faut expliquer comment tu arrives à ces specifications.\\}
+
+Since the point is to understand what is the \textit{ideal} reference of the PyWFS, we need a continuous way to update the actual reference. To do so, DrWHO adopts an approach of updating regularly this reference, chosen based on the PyWFS images corresponding to best PSF image quality. In other words, it is a lucky imaging of the PSF leading to the selection of the best PyWFS images. \\
+The quality criteria for the PSF is flexible: it can be the Strehl ratio, the contrast, the minimum of intensity, etc. The algorithm proceeds as follows: on a defined timescale - that we will set at 30 seconds for now -, the algorithm first identifies the PSF frames with the best X\% score, that we will set at 10\% for now. Then, out of those 10\% frames, the corresponding PyWFS measurements are taken. Those corresponding 10\% PyWFS measurements are averaged, weighted on the value of the score. The resulting PyWFS frame replaces the PyWFS \textit{actual} reference, and the algorithm restarts at the following timescale. We present the procedure step by step of DrWHO with the  description in algorithm \ref{algo:DrWHO}.\\
+
+Therefore, as the algorithm proceeds, the point of convergence of the AO loop changes and takes into consideration the NCPA contribution. Thus, the PSF quality improves, and converges towards a better score. \\
 
 
-Since the point is to understand what is the ideal reference of the WFS, we need a continuous way to update the actual reference. DrWHO adopts a kind of reinforcement learning approach to do so, where the "agent" is the PWFS, the action is the actual reference update, with the reward being the Strehl ratio, and the state the NCPA. \\
-Here I describe the steps of the algorithms: 
-\begin{itemize}
-    \item on a 30 seconds timescale, the algorithm identifies the PSF frames with the best 10\% Strehl ratio;
-    \item out of those 10\% frames, the corresponding WFS measurements are taken;
-    \item those corresponding 10\% WFS measurements are averaged, weighted on the value of the Strehl ratio; 
-    \item the resulting WFS frame replaces the WFS reference, with an integrator filter
-    \item repeat 
-\end{itemize}
 
-Therefore, as the algorithm proceeds, the WFS is continuously rewarded for high quality PSF, and thus the PSF quality improves, and converges towards a better Strehl. \\
-
+%Here I describe the steps of the algorithms: 
+%\begin{itemize}
+%    \item on a 30 seconds timescale, the algorithm identifies the PSF frames with the best 10\% Strehl ratio;
+%    \item out of those 10\% frames, the corresponding WFS measurements are taken;
+%    \item those corresponding 10\% WFS measurements are averaged, weighted on the value of the Strehl ratio; 
+%    \item the resulting WFS frame replaces the WFS reference, with an integrator filter
+%    \item repeat 
+%\end{itemize}
 
 \begin{algorithm}[H]
- \KwData{PWFS frames, fast science camera frames.}
- \KwResult{Update the reference of the PWFS}
- initialization: reference of the PWFS with the internal light source\;
+ \KwData{\begin{itemize}[noitemsep,nolistsep]
+     \item PyWFS frames
+     \item fast science camera frames
+ \end{itemize}}
+ \KwResult{Update the reference of the PyWFS}
+ \textbf{Initialization:} take the reference of the PyWFS with the internal light source\;
  \While{AO loop is running}{
-  acquire PWFS and fast science images\;
+ \begin{itemize}
+     \item acquire PyWFS and fast science images\;
     \While {Dr WHO loop is running} {
-    - take the 10\% best science data\; 
-    - take the corresponding WFS images\;
-    - average them, weighted on the SR value\;
-    - the resulting frame replaces the WFS reference, with a low-pass filter\;
+    \begin{itemize}
+        \item take the 10\% best science data\;
+        \item take the corresponding PyWFS images\;
+        \item average them, weighted on the score value\;
+        \item the resulting frame replaces the PyWFS reference, with a low-pass filter\;
+        \item PyWFS reference updated. 
+    \end{itemize}
    }{
-   keep updating the WFS reference\;
-  }
- }
+   \item restart DrWHO loop
+   \end{itemize}
+  }}
  \caption{Dr WHO algorithm mindset}
-\end{algorithm}
+ \label{algo:DrWHO}
+ \end{algorithm}
 
+
+
+\begin{figure*}[ht!]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{fig/DrWHOscematicview.png}
+\caption{Schematic view of DrWHO}
+\label{fig:DrWHOschema}
+\end{center}
+\end{figure*}
 
 
 
 \section{Adaptive optics simulations}
-Progressing in the algorithm requires numerical simulations; this section presents the AO simulation set up with Compass \citep{Compass}.
-Compass is a versatile AO simulator, which has been designed to meet the need of high-performance for the simulation of AO systems, modeling several kinds of AO features, including several kinds of WFS, atmospheric simulations, DMs, telescopes, and RTCs. It offers a suitable environment for simulating single conjugate adaptive optics (SCAO), for very large telescopes (VLT) and extremely large telescopes (ELT) \citep{Vidal2018}.  Simulations of Dr WHO on the Compass software have first been implemented : the main point is to explore the algorithm and implement it first in simulation ahead of implementations on the bench of the SCExAO instrument, with the internal light source, and before the observations. Being able to go back and forth between simulation and instrument have help pin down the issues faced.  \\
+
+This section presents the AO simulation set up with Compass \citep{Compass}.
+Compass is a versatile AO simulator, which has been designed to meet the need of high-performance for the simulation of AO systems, modeling several kinds of AO features, including several kinds of WFS, atmospheric simulations, DMs, telescopes, and RTCs. It offers a suitable environment for simulating single conjugate adaptive optics (SCAO), for very large telescopes (VLT) and extremely large telescopes (ELT) \citep{Vidal2018}.  Simulations of DrWHO on the Compass software have first been implemented, having in mind the goal to explore the algorithm potential. 
+
+%and implement it first in simulation ahead of implementations on the bench of the SCExAO instrument, with the internal light source, and before the observations. Being able to go back and forth between simulation and instrument have help pin down the issues faced.  \\
 
 \subsection{Simulating SCExAO}
-The first step was to simulate SCExAO on Compass, and essentially the pre-correction of the first stage of the AO. In fact, the high contrast instrument on the Subaru Telescope is actually composed of two AO systems, AO188, and then SCExAO. AO188 is the low order AO system, with a curvature wavefront sensor and a DM with 188 actuators on its diameter. SCExAO, however, has a much higher capacity to correct higher orders of aberrations, with a PWFS and a DM of 54 actuators on its diameter. \\
+
+The first step was to simulate SCExAO on Compass, and essentially the pre-correction of the first stage of the AO. In fact, the high contrast instrument on the Subaru Telescope is actually composed of two AO systems, AO188, and then SCExAO. AO188 is the low order AO system, with a curvature wavefront sensor and a DM with 188 actuators on its diameter. SCExAO, however, has a much higher capacity to correct higher orders of aberrations, with a PyWFS and a DM of 54 actuators on its diameter \textcolor{red}{what kind of DM is it?}. \\
 
 The point isn't necessarily to reproduce exactly SCExAO on Compass, but rather to have a simulation that is close enough to be relevant for testing the algorithm, and predict results on the bench and, later on, on-sky. Table \ref{tab:simuParams} synthetizes the parameters used in the simulation.\\
 
-\begin{itemize}[noitemsep,nolistsep]
-    \item $L_0$ = 15m, for simulating the AO188 pre-correction, instead of 100m for uncorrected normal conditions;
-    \item The Fried parameter : $r_0$ = 0.16m at 500nm;
-    \item The wavelength of the science short exposure camera = 1.65$mu$;
-    \item The loop was set to run at 2kHz;
-    \item The number of pixels along the diameter of the PWFS = 80;
-    \item number of actuators along the diameter of the DM = 54;
-    \item The optical throughput coefficient = 50\%;
-    \item Only the photon noise is taken into consideration;\\
-\end{itemize}
+%\begin{itemize}[noitemsep,nolistsep]
+%    \item $L_0$ = 15m, for simulating the AO188 pre-correction, instead of 100m for uncorrected normal conditions;
+%    \item The Fried parameter : $r_0$ = 0.16m at 500nm;
+%    \item The wavelength of the science short exposure camera = 1.65$mu$;
+%    \item The loop was set to run at 2kHz;
+%    \item The number of pixels along the diameter of the PyWFS = 80;
+%    \item number of actuators along the diameter of the DM = 54;
+%    \item The optical throughput coefficient = 50\%;
+%    \item Only the photon noise is taken into consideration;\\
+%\end{itemize}
 
 
 
@@ -230,41 +250,40 @@ The point isn't necessarily to reproduce exactly SCExAO on Compass, but rather t
 			\hline\hline
 			\multirow{4}{*}{Telescope} & $D$ = 8.3~m diameter\\
 			& Subaru pupil \\
-			& $\quad$798 aggregated hexagons\\
 			& $\quad$No support spiders\\
 			\hline
 			\multirow{5}{*}{Turbulence layer} & von Kármán, ground layer only\\
 			& $r_0$ = 0.16 at 500~nm \\ % variable in a\\
 			%& $\quad$useful range of 7.0 - 35.0~cm\\
-			& L$_0$ = 15~m\\
+			& L$_0$ = 15~m\footnote{to simulate AO188's pre-correction}, \\
 			& $||\overrightarrow{\vect{v}}||$ = 10~m.s$^{-1}$\\
 			\hline
-			PWFS & \\
-			\multirow{2}{*}{$\quad$Subapertures} & 92$\times$92 -- pixel size 42~cm.\\
-			& 24,080 useful pixels\\
-			$\quad$Wavelength & Monochromatic, 658~nm\\
+			PyWFS & \\
+			$\quad$Subapertures & 80$\times$80 \\%-- pixel size 42~cm.\\
+			%& 24,080 useful pixels\\
+			$\quad$Wavelength & Monochromatic, 750~nm\\
 			$\quad$Throughput & 50\% \\
-			$\quad$Modulation & Circular, 4~$\frac{\lambda}{D}$ radius\\
-			%$\quad$Readout noise & 0.3~$e^{-}$\\
+			$\quad$Modulation & Circular, 3~$\frac{\lambda}{D}$ radius\\
+			$\quad$Photon noise only \\% & 0.3~$e^{-}$\\
 			\hline
 			Focal Plane Camera & \\
 			$\quad$Wavelength & Monochromatic, 1.65~$\mu$m\\ 
-			\hline 
-			Source & On-axis natural guide star\\
-			Guide star flux & Zero point: $2.6 \times 10^{10}$~ph.s$^{-1}$.m$^{-2}$\\
-			\hline
-			\multirow{5}{*}{Adaptive mirrors} & Tip-tilt mirror\\
-			& Hexagonal M4 model pattern\\
-			& $\quad$Pitch of 54~cm\\
-			& $\quad$Coupling of 0.24\\
-			& $\quad$4,310 controlled actuators\\
-			& Both with infinite bandwidth\\
+			%\hline 
+			%Source & On-axis natural guide star\\
+			%Guide star flux & Zero point: $2.6 \times 10^{10}$~ph.s$^{-1}$.m$^{-2}$\\
+			%\hline
+			%\multirow{5}{*}{Adaptive mirrors} & Tip-tilt mirror\\
+			%& Hexagonal M4 model pattern\\
+			%& $\quad$Pitch of 54~cm\\
+			%& $\quad$Coupling of 0.24\\
+			%& $\quad$4,310 controlled actuators\\
+			%& Both with infinite bandwidth\\
 			\hline
 			RTC controller & \\
 			$\quad$Loop rate & 2~kHz\\
 			$\quad$Method & Linear modal integrator\\
-			$\quad$Latency & Data flow 1 frame + MVM 1 frame\\
-			$\quad$Basis & DM Karhunen-Loëve basis\tablefootmark{(a)}\\
+			%$\quad$Latency & Data flow 1 frame + MVM 1 frame\\
+			$\quad$Basis & DM Karhunen-Loeve basis\tablefootmark{(a)} \textcolor{red}{or Btt or Gendron}\\
 			\hline
 		\end{tabular}
 		\tablefoot{
@@ -273,29 +292,64 @@ The point isn't necessarily to reproduce exactly SCExAO on Compass, but rather t
 	\end{table}
 
 
-\textcolor{blue}{talk about how the interaction matrix is taken, how we take care of initializing the PWFS reference, how we deal with the noise}
+\textcolor{blue}{talk about how the interaction matrix is taken, how we take care of initializing the PyWFS reference, how we deal with the noise}
+ 
+ 
+
+
  
 
 \subsection{Dr WHO on Compass}
-Dr WHO on Compass was implemented in Python
-To make this convergence faster, the DM was poked with random phases with an amplitude comparable to the one of the NCPA, in order to increase the probability of lucky imaging. \\
 
-\textcolor{blue}{describe why you need to reopen - re-zero the loop at each Dr WHO iteration.}\\
+DrWHO on Compass was implemented in Python. To make this convergence faster, the DM was poked with random phases with an amplitude comparable to the one of the NCPA at 0.04$\mu m$, in order to increase the probability of lucky imaging. \\
+\textcolor{blue}{The Strehl ratio when the loop is running, without NCPA corresponds to 93\%. When adding the NCPA, the SR drops to 81\%. }
+
+
+\subsection{Simulation results}
+
+
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{fig/compass_ref.png}
+\caption{\textcolor{red}{put similar one with proper axis} Left: initial reference of the pyramid. Right: updated reference after a few iteration of DrWHO; the shape corresponds to the NCPA acquisition. }
+\label{fig:refpyramide}
+\end{center}
+\end{figure}
+
+Figure \ref{fig:refpyramide} shows the difference of the reference on the PyWFS when taken from the internal source, and after implementation of DrWHO. \\
+
+Figure \ref{fig:comapss_results1} shows the sharp jump in the SR when going from the initial reference, to the DrWHO-trained reference, after a 5 iterations iterations of the algorithm. \textcolor{blue}{re-write after re-doing compass. calculate how much improvement there is between no-NCPA, NCPA but no Dr WHO, and NCPA+DrWHO.}
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{fig/compass_results1.png}
+\caption{\textcolor{red}{to be updated} }
+\label{fig:comapss_results1}
+\end{center}
+\end{figure}
+
+
+%\textcolor{blue}{describe why you need to reopen - re-zero the loop at each Dr WHO iteration.}\\
+
+
+
+\newpage
 
 \section{Dr WHO on SCExAO}
 
 Dr WHO was then deployed on the SCExAO instrument, which is located on the infrared nasmyth platform of the Subaru Telescope, after the AO188 instrument. 
-\textcolor{blue}{add a schema to show how SCExAO and AO188 work, with focal plane camera and PWFS}
-The instrument is provided with a PWFS in the 600-950 wavelength range \citep{Lozi2019PWFS}. The real time control (RTC) of the AO system is managed by the CACAO software - Compute And Control for Adaptive Optics - \citep{cacao2018} \textcolor{blue}{describe how cacao relies on HPC and is GPU based}. The diameter of the DM has 45 actuators on the active pupil, giving a control radius of 22.5$\lambda$/D. We use the CACAO software to interact with the system and implement the algorithm, to communicate between the PWFS and the DM. The DM is 12 channels, on which several corrections are implemented from additional wavefront sensors or wavefront control techniques \textcolor{blue}{add citations of examples of WF control techniques that use the DM}. Furthermore, CACAO updates the reference of the PWFS by adding an offset which prevents the AO loop to cancel out the commands of the wavefront control sensing techniques with the DM. 
+\textcolor{blue}{add a schema to show how SCExAO and AO188 work, with focal plane camera and PyWFS}
+The instrument is provided with a PyWFS in the 600-950 wavelength range \citep{Lozi2019PyWFS}. The real time control (RTC) of the AO system is managed by the CACAO software - Compute And Control for Adaptive Optics - \citep{cacao2018} \textcolor{blue}{describe how cacao relies on HPC and is GPU based}. The diameter of the DM has 45 actuators on the active pupil, giving a control radius of 22.5$\lambda$/D. We use the CACAO software to interact with the system and implement the algorithm, to communicate between the PyWFS and the DM. The DM is 12 channels, on which several corrections are implemented from additional wavefront sensors or wavefront control techniques \textcolor{blue}{add citations of examples of WF control techniques that use the DM}. Furthermore, CACAO updates the reference of the PyWFS by adding an offset which prevents the AO loop to cancel out the commands of the wavefront control sensing techniques with the DM. 
 There are several scientific cameras downstream SCExAO, including CHARIS and REACH in the near-infrared \textcolor{blue}{add citation for both}, VAMPIRES in the visible \citep{vampires2015}. 
 
 
 \subsection{Data synchronisation}
 
-On SCExAO, the PWFS and the short exposure focal plane camera run at different frequencies, hence the need of synchronising the data streams. 
+On SCExAO, the PyWFS and the short exposure focal plane camera run at different frequencies, hence the need of synchronising the data streams. 
 This can be done directly on the files that are on the hard drive, but not in real time. Indeed, Dr WHO doesn't need to have real time frames, since a loop of the algorithm is several seconds long. 
-A script for dealing with is has been implemented. Three inputs are required: the two streams to synchronize - here the PWFS and the focal plane camera -; and the time interval, which is the frequency at which the two streams will be re-sampled. \\
-For example, if the focal plane camera runs at 1kHz, the PWFS camera runs at 2kHz, and we want a stream at 3kHz : we want both of those streams synchronized at this frequency difference. Then, the synchronization script will wait for fits cubes and the timing files to appear on the hard drive, read them and re-sample them to the same time baseline. This script is optimized to handle missed frames, and if the timing isn't continuous. Furthermore, it does a linear interpolation of the streams. For example, if we want a 1ms frame, and there is a half PWFS cube and half of the focal plane camera, it will do the weighted average. 
+A script for dealing with is has been implemented. Three inputs are required: the two streams to synchronize - here the PyWFS and the focal plane camera -; and the time interval, which is the frequency at which the two streams will be re-sampled. \\
+For example, if the focal plane camera runs at 1kHz, the PyWFS camera runs at 2kHz, and we want a stream at 3kHz : we want both of those streams synchronized at this frequency difference. Then, the synchronization script will wait for fits cubes and the timing files to appear on the hard drive, read them and re-sample them to the same time baseline. This script is optimized to handle missed frames, and if the timing isn't continuous. Furthermore, it does a linear interpolation of the streams. For example, if we want a 1ms frame, and there is a half PyWFS cube and half of the focal plane camera, it will do the weighted average. 
 This scripts then provides an other stream of data cubes of the required length (which is set ahead), that are saved on the disk. As said above, it isn't real time as there is a latency to it, however it does spill fits files with the sampling and the timing information. Choosing the length of the data cubes is linked with the latency we need for Dr WHO. This script needs to be launched once only, then it catches up as the AO loop is running. 
 
 \subsection{Details of specific Scexao Dr WHO }
@@ -339,7 +393,22 @@ The first step taken was to look at the telemetry of previous nights and on one 
 \section{Discussion}
 This algorithm is very simplistic and deals with basic lucky imaging. However, there are number or ways this algorithm could be improved to better understand the NCPA, and thus better correct them. Stay tuned for the upcoming papers 
 
+Yet, another key issue is that the PyWFS is non-linear: its response is different depending on the amplitude of the incoming wavefront. Thus, even if we understand what the NCPA are and update the reference of the WFS, there will then be a wrong understanding of the NCPA from the DM because of this non-linearity, therefore a wrong command on the DM, therefore a wrong correction of the NCPA. Adding to that that the NCPA are dynamic, the problem reaches another level of complexity. \ref{fig:pyr_ncpa_pb} gives a schematic view of the problem. 
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.45\textwidth]{fig/pyr_ncpa_pb.png}\
+      \caption{Schematic description of the NCPA problem linked with the non-linearity of the PyWFS.}
+    \label{fig:pyr_ncpa_pb}
+\end{figure}
+
 \section{Conclusion}
+
+
+
+\section{Acknowledgments}
+The development of SCExAO was supported by the Japan Society for the Promotion of Science (Grant-in-Aid for Research \#23340051, \#26220704, \#23103002, \#19H00703 \& \#19H00695), the Astrobiology Center of the National Institutes of Natural Sciences, Japan, the Mt Cuba Foundation and the director's contingency fund at Subaru Telescope. The authors wish to recognize and acknowledge the very significant cultural role and reverence that the summit of Maunakea has always had within the Hawaiian community. We are most fortunate to have the opportunity to conduct observations from this mountain. NS acknowledges support from the PSL Iris-OCAV project. 
+
 
 \newpage
 \bibliographystyle{aasjournal}
