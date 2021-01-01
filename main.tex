@@ -211,7 +211,7 @@ Therefore, as the algorithm proceeds, the point of convergence of the AO loop ch
 
 
 
-\section{Adaptive optics simulations}
+\section{Dr WHO simulations}
 
 This section presents the AO simulation set up with Compass \citep{Compass}.
 Compass is a versatile AO simulator, which has been designed to meet the need of high-performance for the simulation of AO systems, modeling several kinds of AO features, including several kinds of WFS, atmospheric simulations, DMs, telescopes, and RTCs. It offers a suitable environment for simulating single conjugate adaptive optics (SCAO), for very large telescopes (VLT) and extremely large telescopes (ELT) \citep{Vidal2018}.  Simulations of DrWHO on the Compass software have first been implemented, having in mind the goal to explore the algorithm potential. 
@@ -293,9 +293,6 @@ The point isn't necessarily to reproduce exactly SCExAO on Compass, but rather t
 
 
 \textcolor{blue}{talk about how the interaction matrix is taken, how we take care of initializing the PyWFS reference, how we deal with the noise}
- 
- 
-
 
  
 
@@ -305,14 +302,13 @@ DrWHO on Compass was implemented in Python. To make this convergence faster, the
 \textcolor{blue}{The Strehl ratio when the loop is running, without NCPA corresponds to 93\%. When adding the NCPA, the SR drops to 81\%. }
 
 
+
 \subsection{Simulation results}
-
-
 
 \begin{figure}[ht!]
 \begin{center}
 \includegraphics[width=0.5\textwidth]{fig/compass_ref.png}
-\caption{\textcolor{red}{put similar one with proper axis} Left: initial reference of the pyramid. Right: updated reference after a few iteration of DrWHO; the shape corresponds to the NCPA acquisition. }
+\caption{\textcolor{red}{put similar one with proper axis - is it important tho?} Left: initial reference of the pyramid. Right: updated reference after a few iteration of DrWHO; the shape corresponds to the NCPA acquisition. }
 \label{fig:refpyramide}
 \end{center}
 \end{figure}
@@ -323,7 +319,7 @@ Figure \ref{fig:comapss_results1} shows the sharp jump in the SR when going from
 
 \begin{figure}[ht!]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{fig/compass_results1.png}
+\includegraphics[width=0.4\textwidth]{fig/compass_results1.png}
 \caption{\textcolor{red}{to be updated} }
 \label{fig:comapss_results1}
 \end{center}
@@ -334,13 +330,17 @@ Figure \ref{fig:comapss_results1} shows the sharp jump in the SR when going from
 
 
 
-\newpage
 
 \section{Dr WHO on SCExAO}
 
 Dr WHO was then deployed on the SCExAO instrument, which is located on the infrared nasmyth platform of the Subaru Telescope, after the AO188 instrument. 
-\textcolor{blue}{add a schema to show how SCExAO and AO188 work, with focal plane camera and PyWFS}
-The instrument is provided with a PyWFS in the 600-950 wavelength range \citep{Lozi2019PyWFS}. The real time control (RTC) of the AO system is managed by the CACAO software - Compute And Control for Adaptive Optics - \citep{cacao2018} \textcolor{blue}{describe how cacao relies on HPC and is GPU based}. The diameter of the DM has 45 actuators on the active pupil, giving a control radius of 22.5$\lambda$/D. We use the CACAO software to interact with the system and implement the algorithm, to communicate between the PyWFS and the DM. The DM is 12 channels, on which several corrections are implemented from additional wavefront sensors or wavefront control techniques \textcolor{blue}{add citations of examples of WF control techniques that use the DM}. Furthermore, CACAO updates the reference of the PyWFS by adding an offset which prevents the AO loop to cancel out the commands of the wavefront control sensing techniques with the DM. 
+\textcolor{blue}{add a schema to show how SCExAO and AO188 work, with focal plane camera and PyWFS.\\}
+
+The instrument is provided with a PyWFS in the 600-950 wavelength range \citep{Lozi2019PyWFS}. The real time control (RTC) of the AO system is managed by the CACAO software - Compute And Control for Adaptive Optics - \citep{cacao2018} \textcolor{blue}{describe how cacao relies on HPC and is GPU based}.
+
+The diameter of the DM has 45 actuators on the active pupil, giving a control radius of 22.5$\lambda$/D. We use the CACAO software to interact with the system and implement the algorithm, to communicate between the PyWFS and the DM. The DM is composed of 12 different channels, on which several corrections are implemented from additional wavefront sensors or wavefront control techniques \textcolor{blue}{add citations of examples of WF control techniques that use the DM, like F&F?}.
+
+Furthermore, CACAO updates the reference of the PyWFS by adding an offset which prevents the AO loop to cancel out the commands of the wavefront control sensing techniques with the DM. 
 There are several scientific cameras downstream SCExAO, including CHARIS and REACH in the near-infrared \textcolor{blue}{add citation for both}, VAMPIRES in the visible \citep{vampires2015}. 
 
 
@@ -352,27 +352,6 @@ A script for dealing with is has been implemented. Three inputs are required: th
 For example, if the focal plane camera runs at 1kHz, the PyWFS camera runs at 2kHz, and we want a stream at 3kHz : we want both of those streams synchronized at this frequency difference. Then, the synchronization script will wait for fits cubes and the timing files to appear on the hard drive, read them and re-sample them to the same time baseline. This script is optimized to handle missed frames, and if the timing isn't continuous. Furthermore, it does a linear interpolation of the streams. For example, if we want a 1ms frame, and there is a half PyWFS cube and half of the focal plane camera, it will do the weighted average. 
 This scripts then provides an other stream of data cubes of the required length (which is set ahead), that are saved on the disk. As said above, it isn't real time as there is a latency to it, however it does spill fits files with the sampling and the timing information. Choosing the length of the data cubes is linked with the latency we need for Dr WHO. This script needs to be launched once only, then it catches up as the AO loop is running. 
 
-\subsection{Details of specific Scexao Dr WHO }
-
-The way it's done is in 4 steps: \\
-1- get the 2 data streams; \\
-2- take the the timing files; \\ 
-3- create the synchronized files and generate a *.sync.fits;\\ 
-4- frame selection with Dr WHO (with the script \textit{cacao-selectWFS}. \\
-
-The input parameters to run the whole algo ( \textit{cacao-WFSrefTunePSFloop} ) are as follow, in \textit{runDrWHO} (bash script) : 
-\begin{itemize}[noitemsep,nolistsep]
-    \item starttime : in Unix time second
-    \item data path of the PyWFS and focal plane data, for the synchronization 
-    \item the number of iterations you want Dr WHO to run 
-    \item the selection fraction
-    \item the optimized mode (???)
-    \item the Exposure time (OutExpTime)
-    \item the time lag between the PSF and WFS streams
-    \item the time span of the Dr WHO loop 
-\end{itemize}
-
-The algo runs on scexao1, the new references are all saved as imwfsbest.fits and sends it directly to scexao5 (AOloop/DrWHO directory) to apply the new reference on the PyWFS thanks to the bash script \textit{cacao-WFSref}.  
 
 
 \subsection{PSF selection fraction optimization}
